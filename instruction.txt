@@ -1,0 +1,35 @@
+https://scotch.io/tutorials/understanding-and-working-with-files-in-laravel
+
+
+
+    public function store(Request $request){
+
+        if($request->hasFile('fileimg')){
+            $fileValidation =$request->validate([
+                'fileimg'=>'required|file|image|mimes:jpeg,png,gif,webp|max:2048'
+            ]);
+            $file= $fileValidation['fileimg'];
+
+            $fileName = $file->getClientOriginalName();
+
+            $filelg = 'lg'.$fileName;
+            $filemd = 'md'.$fileName;
+            $filesm = 'sm'.$fileName;
+
+
+
+            $path =$file->storeAs('photos',$fileName);
+
+
+            Image::load(storage_path('app/'.$path))
+                ->fit(Manipulations::FIT_CONTAIN,250,250)
+                 ->optimize()
+                ->save(storage_path('app/manipulated/'.$fileName));
+
+
+              return 'file uploaded in'.$path;
+
+        }
+        //return $request->all();
+
+    }
