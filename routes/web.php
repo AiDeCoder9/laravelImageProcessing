@@ -18,5 +18,8 @@ Route::get('/', function () {
 
 Route::get('/file','FileController@index');
 
+Route::get('/filesuccess/{file}','FileController@show');
+
+
 
 Route::post('/file','FileController@store');

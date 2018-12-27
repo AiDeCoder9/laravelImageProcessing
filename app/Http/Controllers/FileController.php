@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use Illuminate\Http\Request;
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
@@ -28,6 +29,9 @@ class FileController extends Controller
             $filemd = 'md'.$fileName;
             $filesm = 'sm'.$fileName;
 
+
+
+
             $pathlg = $file->storeAs('photos',$filelg);
 
             Image::load(storage_path('app/'.$pathlg))
@@ -51,14 +55,36 @@ class FileController extends Controller
 
 
 
+            $imgList []=$filelg;
+            $imgList []=$filemd;
+            $imgList []=$filesm;
+
+             $imgStringList= implode(',',$imgList);
 
 
 
-              return 'file uploaded in folders';
+
+            File::create([
+                    'user_id'=>'1',
+                    'filename'=>$imgStringList
+            ]);
+
+
+
+
+              return redirect('/filesuccess');
 
         }
         //return $request->all();
 
     }
+
+    public function show($id){
+
+        $file = File::findOrFail($id);
+        return view('file.image-success',compact('file'));
+
+    }
+
 
 }
