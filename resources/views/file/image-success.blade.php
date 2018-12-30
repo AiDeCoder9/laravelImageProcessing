@@ -18,18 +18,23 @@
 
 <div>
     <?php
-//        use Illuminate\Support\Facades\Storage;
-//    $fileName= $file->filename;
-//    $imgList = explode(',',$fileName);
-//    echo print_r($imgList);
+        //use Illuminate\Support\Facades\Storage;
+    $fileName= $file->filename;
+    $imgList = explode(',',$fileName);
+   // echo print_r($imgList);
 //
 //    $url = Storage::url($imgList[0]);
+//
+//    echo "<br>";
 //    echo $url;
     ?>
 </div>
 
-<img src="{{asset('storage/app/manpulated/lg/hero.jpg')}}" alt="Fileupload">
 
+
+<img src="{{asset('/storage/lg/'.$imgList[0])}}" alt="">
+<img src="{{asset('/storage/md/'.$imgList[1])}}" alt="">
+<img src="{{asset('/storage/sm/'.$imgList[2])}}" alt="">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

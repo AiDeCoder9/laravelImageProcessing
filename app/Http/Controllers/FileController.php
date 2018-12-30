@@ -32,26 +32,26 @@ class FileController extends Controller
 
 
 
-            $pathlg = $file->storeAs('photos',$filelg);
+            $pathlg = $file->storeAs('public',$filelg);
 
             Image::load(storage_path('app/'.$pathlg))
                 ->fit(Manipulations::FIT_CONTAIN,550,550)
                 ->optimize()
-                ->save(storage_path('app/manipulated/lg/'.$filelg));
+                ->save(storage_path('app/public/lg/'.$filelg));
 
-            $pathmd = $file->storeAs('photos',$filemd);
 
-            Image::load(storage_path('app/'.$pathmd))
+
+            Image::load(storage_path('app/'.$pathlg))
                 ->fit(Manipulations::FIT_CONTAIN,450,450)
                 ->optimize()
-                ->save(storage_path('app/manipulated/md/'.$filemd));
+                ->save(storage_path('app/public/md/'.$filemd));
 
-            $pathsm = $file->storeAs('photos',$filesm);
 
-            Image::load(storage_path('app/'.$pathsm))
+
+            Image::load(storage_path('app/'.$pathlg))
                 ->fit(Manipulations::FIT_CONTAIN,350,350)
                 ->optimize()
-                ->save(storage_path('app/manipulated/sm/'.$filesm));
+                ->save(storage_path('app/public/sm/'.$filesm));
 
 
 
@@ -72,7 +72,7 @@ class FileController extends Controller
 
 
 
-              return redirect('/filesuccess');
+              return 'file has been uploaded';
 
         }
         //return $request->all();
